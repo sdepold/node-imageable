@@ -11,13 +11,14 @@ var Helpers = module.exports = {
   
   serverRequests: 0,
  
-  clearTmpFolder: function() {
+  clearTmpFolders: function() {
     Helpers.exec('rm ' + process.cwd() + "/test/tmp/*")
+    Helpers.exec('rm ' + process.cwd() + "/../tmp/*")
   },
   clearTmpFolderBatch: {
     'clear': {
       topic: function() {
-        Helpers.clearTmpFolder()
+        Helpers.clearTmpFolders()
         this.callback()
       },
       'make it so': function(){}
