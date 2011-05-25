@@ -1,7 +1,7 @@
 {
   "author": "DaWanda GmbH <mirko@dawanda.com>",
   "name": "imageable",
-  "description": "On-demand image manipulation middleware for express and connect",
+  "description": "On-demand image manipulation middleware for express and connect.",
   "version": "0.0.1",
   "homepage": "https://github.com/dawanda/node-imageable",
   "repository": {
