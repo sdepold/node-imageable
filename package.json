@@ -1,0 +1,24 @@
+{
+  "author": "DaWanda GmbH <mirko@dawanda.com>",
+  "name": "imageable",
+  "description": "On-demand image manipulation middleware for express and connect",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dawanda/node-imageable",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dawanda/node-imageable.git"
+  },
+  "scripts": {
+    "test": "expresso"
+  },
+  "engines": {
+    "node": ">=v0.4.7"
+  },
+  "dependencies": {
+    "express": ">=2.3.7",
+    "log": ">=1.2.0"
+	},
+  "devDependencies": {
+    "vows": ">=0.5.8"
+  }
+}
