@@ -13,7 +13,6 @@ vows.describe('image-processing').addBatch({
       })
     },
     "resizes images when size is passed": function(err, stdout, stderr) {
-      console.log(err, stdout)
       assert.ok(typeof stdout != 'undefined')
       assert.includes(stdout, '100x35')
     }

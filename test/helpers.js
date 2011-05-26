@@ -46,8 +46,6 @@ var Helpers = module.exports = {
       console.log("Express server listening on port %d", app.address().port)
     }
     
-    console.log(cmd)
-
     Helpers.exec(cmd, function(err, stdout, stderr) {
       callback && callback(err, stdout, stderr)
       if(--Helpers.serverRequests == 0) {
