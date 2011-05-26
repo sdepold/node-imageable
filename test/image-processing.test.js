@@ -2,9 +2,9 @@ var assert    = require('assert')
   , vows      = require('vows')
   , Helpers   = require("./helpers")
   , srcImgUrl = encodeURIComponent("http://www.google.com/intl/en_ALL/images/logo.gif")
-  , im        = require('../lib/image-magick')
+  , im        = require('../lib/image-processing')
 
-vows.describe('image-magick').addBatch({
+vows.describe('image-processing').addBatch({
   "convert with resize": {
     topic: function() {
       var cb = this.callback
