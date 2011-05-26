@@ -14,9 +14,7 @@
   "engines": {
     "node": ">=v0.4.7"
   },
-  "dependencies": {
-    "imagemagick": ">=0.1.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "vows": ">=0.5.8"
   }
