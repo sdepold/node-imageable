@@ -61,9 +61,9 @@ Helpers.__defineGetter__('random', function() {
 })
 
 Helpers.__defineGetter__('testImageTargetPath', function() {
-  return process.cwd() + "/test/tmp/test" + Helpers.random +".gif"
+  return process.cwd() + "/test/tmp/test" + Helpers.random +".jpg"
 })
 
 Helpers.__defineGetter__('testImagePath', function() {
-  return process.cwd() + "/test/assets/test.gif"
+  return process.cwd() + "/test/assets/test.jpg"
 })
