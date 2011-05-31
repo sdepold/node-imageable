@@ -55,23 +55,26 @@ You can also take a look at https://github.com/dawanda/node-imageable-server to 
 
 Here you can see the routes, imageable reacts on.
 
-    # on the fly resize (fit image to given size)
+    # resize an image with keeping ratio
+    http://localhost:3000/resize?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&size=200x200
+
+    # resize an image to given size without keeping the ratio
     http://localhost:3000/fit?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&size=200x200
 
-    # if secret is provided config/config.json only works for hashed params
+    # crop a specific area of an image
+    http://localhost:3000/crop?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&crop=200x200%2B20%2B40
+
+    # crop a specific area and resize it with keeping the ratio
+    http://localhost:3000/crop?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&crop=200x200%2B20%2B40&size=100x50
+
+    # if secret is provided in config/config.json, all urls must have a hash following the resize method (see Hashing)
     http://localhost:3000/fit/-hash-?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&size=200x200
 
-    # magic hash code that is valid for all requests, e.g. for testing
+    # use the magic hash code that is valid for all requests, e.g. for testing
     http://localhost:3000/fit/-magic-hash-?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&size=200x200
 
     # append any fancy name for nice looking urls and image downloads
     http://localhost:3000/fit/-hash-/Fancy-Ignored-Name.gif?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&size=200x200
-
-    # crop
-    http://localhost:3000/crop?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&crop=200x200
-
-    # crop + resize(fit) cropped section
-    http://localhost:3000/crop?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&crop=200x200&size=100x50
 
 If you specify the namespace in your config (let's say to 'imageable'), all routes will be scoped to /imageable/fit... or /imageable/crop and so on.
 
@@ -96,9 +99,7 @@ To make sure nobody missuses your image-server you can enable hashing in the con
 
 # TODO
 
- - add 'crop'
  - add 'expand' which would add whitespace to fill missing image areas
- - test cannot write response body in correct encoding for identify
 
 # Authors
 
