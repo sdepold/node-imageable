@@ -88,7 +88,7 @@ To make sure nobody missuses your image-server you can enable hashing in the con
       , hash      = crypto.createHash('md5').update(query + config.secret).digest("hex").slice(0,8)
       , url       = "http://localhost:3000/resize/" + hash + "/Very-Nice-Image.gif?" + query
     
-    res.send('<img src="' + url + ' />")
+    res.send('<img src="' + url + '" />')
 
     # RUBY
     TODO
