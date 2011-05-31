@@ -17,15 +17,19 @@ In your express app you will find a section like this:
 To plug imageable into your app, just add the following ABOVE the router:
 
     app.use(imageable({
-      secret:     "my-very-secret-secret"
-    , magicHash:  "magic"
-    , namespace:  ""
+      secret:     "my-very-secret-secret",
+      magicHash:  "magic",
+      namespace:  ""
     }, {
-      before: function() { console.log('before') }
-    , after: function() { console.log('after') }
+      before: function() { console.log('before') },
+      after: function(returnValueOfBefore) { console.log('after') }
     }))
 
-Here is what you want:
+Notice that the after-callback will have the returned value of the before-callback as
+first parameter. Using that mechanism, you can for example track the image processing
+duration.
+
+Here is what an app should look like:
 
     # app.js
     var fs     = require("fs")
@@ -36,7 +40,7 @@ Here is what you want:
       app.use(express.methodOverride())
       app.use(imageable(config, {
         before: function() { console.log('before') },
-        after: function() { console.log('after') }
+        after: function(returnValueOfBefore) { console.log('after') }
       }))
       app.use(app.router)
     })
@@ -44,9 +48,9 @@ Here is what you want:
     # config/config.json
     
     {
-      "secret":     "my-very-secret-secret"
-    , "magicHash":  "magic"
-    , "namespace":  ""
+      "secret":     "my-very-secret-secret",
+      "magicHash":  "magic",
+      "namespace":  ""
     }
 
 You can also take a look at https://github.com/dawanda/node-imageable-server to get a further clue.
