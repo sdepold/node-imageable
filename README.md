@@ -17,17 +17,19 @@ In your express app you will find a section like this:
 To plug imageable into your app, just add the following ABOVE the router:
 
     app.use(imageable({
-      secret:     "my-very-secret-secret",
-      magicHash:  "magic",
-      namespace:  ""
+      "secret":       "my-very-secret-secret"
+    , "magicHash":    "magic"
+    , "namespace":    ""
+    , "maxListeners": 512
     }, {
-      before: function() { console.log('before') },
-      after: function(returnValueOfBefore) { console.log('after') }
+      before: function(stats) { console.log('before') },
+      after: function(stats, returnValueOfBefore) { console.log('after') }
     }))
 
 Notice that the after-callback will have the returned value of the before-callback as
 first parameter. Using that mechanism, you can for example track the image processing
-duration.
+duration. The middleware will automatically track some statistics, such as request,
+average processing time etc.
 
 Here is what an app should look like:
 
@@ -39,18 +41,18 @@ Here is what an app should look like:
       app.use(express.bodyParser())
       app.use(express.methodOverride())
       app.use(imageable(config, {
-        before: function() { console.log('before') },
-        after: function(returnValueOfBefore) { console.log('after') }
+        before: function(stats) { console.log('before') },
+        after: function(stats, returnValueOfBefore) { console.log('after') }
       }))
       app.use(app.router)
     })
 
     # config/config.json
-    
     {
-      "secret":     "my-very-secret-secret",
-      "magicHash":  "magic",
-      "namespace":  ""
+      "secret":       "my-very-secret-secret"
+    , "magicHash":    "magic"
+    , "namespace":    ""
+    , "maxListeners": 512
     }
 
 You can also take a look at https://github.com/dawanda/node-imageable-server to get a further clue.
