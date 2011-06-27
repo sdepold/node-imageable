@@ -7,7 +7,7 @@ vows.describe('image-magick').addBatch({
   "#resize": {
     topic: function() {
       var cb = this.callback
-      im.resize({size: '100x100'}, Helpers.testImagePath, function(err, path){
+      im.resize({size: '100x100', url: Helpers.testImagePath}, function(err, path){
         Helpers.exec("identify " + path, cb)
       })
     },
@@ -22,7 +22,7 @@ vows.describe('image-magick').addBatch({
   "#fit": {
     topic: function() {
       var cb = this.callback
-      im.fit({size: '100x100'}, Helpers.testImagePath, function(err, path) {
+      im.fit({size: '100x100', url: Helpers.testImagePath}, function(err, path) {
         Helpers.exec("identify " + path, cb)
       })
     },
@@ -34,13 +34,13 @@ vows.describe('image-magick').addBatch({
   "#crop": {
     topic: function() {
       var cb = this.callback
-      im.crop({crop: '200x100+20+25'}, Helpers.testImagePath, function(err, path){
+      im.crop({crop: '200x100+20+25', url: Helpers.testImagePath}, function(err, path){
         Helpers.exec("identify " + path, cb)
       })
     },
     "throws an error if no crop param is passed": function() {
       assert.throws(function() {
-        im.crop({}, Helpers.testImagePath, function(){})
+        im.crop({url: Helpers.testImagePath}, function(){})
       }, /crop-param/)
     },
     "resizes images to the size defined in crop param": function(err, stdout, stderr) {
@@ -51,7 +51,7 @@ vows.describe('image-magick').addBatch({
   "#crop with size": {
     topic: function() {
       var cb = this.callback
-      im.crop({crop: '200x400+20+25', size: '100x200'}, Helpers.testImagePath, function(err, path){
+      im.crop({crop: '200x400+20+25', size: '100x200', url: Helpers.testImagePath}, function(err, path){
         Helpers.exec("identify " + path, cb)
       })
     },
