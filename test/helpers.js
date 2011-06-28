@@ -61,7 +61,7 @@ Helpers.__defineGetter__('random', function() {
 })
 
 Helpers.__defineGetter__('testImageTargetPath', function() {
-  return process.cwd() + "/test/tmp/test" + Helpers.random +".jpg"
+  return "http://www.google.de/images/logos/ps_logo2.png"
 })
 
 Helpers.__defineGetter__('testImagePath', function() {
