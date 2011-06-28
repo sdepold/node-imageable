@@ -96,8 +96,19 @@ To make sure nobody missuses your image-server you can enable hashing in the con
     
     res.send('<img src="' + url + '" />')
 
+
     # RUBY
-    TODO
+    require 'digest/md5'
+
+    def resized_image_tag(url, size)
+      query_options = {:url => url, :size => size}
+      digest        = Digest::MD5.new
+      hash          = digest.hexdigest(query_options.to_query + CFG[:node_imageable_secret])[0..7]
+      
+      image_tag "http://localhost:3000/resize/#{hash}/Very-Nice-Image.gif?#{query_options.to_query}"
+    end
+
+    resized_image_tag("http://www.google.com/intl/en_ALL/images/logo.gif", "200x200")
 
 # Running the tests
     
