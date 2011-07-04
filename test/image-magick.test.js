@@ -59,5 +59,17 @@ vows.describe('image-magick').addBatch({
       assert.ok(typeof stdout != 'undefined')
       assert.includes(stdout, '100x200')
     }
+  },
+  "missing image": {
+    topic: function() {
+      var cb = this.callback
+      im.crop({crop: '200x400+20+25', size: '100x200', url: "http://foo.bar"}, function(err, path){
+        Helpers.exec("identify " + path, cb)
+      })
+    },
+    "is generated for invalid sources": function(err, stdout, stderr) {
+      assert.ok(typeof stdout != 'undefined')
+      assert.includes(stdout, '100x200')
+    }
   }
 }).addBatch(Helpers.clearTmpFolderBatch).exportTo(module)
