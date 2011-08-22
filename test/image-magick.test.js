@@ -22,13 +22,13 @@ vows.describe('image-magick').addBatch({
   "#resize with url": {
     topic: function() {
       var cb = this.callback
-      im.resize({size: '100x100', url: "http://de.dawanda.com/images/logo_dawanda.gif"}, function(err, path){
+      im.resize({size: '100x100', url: "http://www.google.com/intl/en_ALL/images/logo.gif"}, function(err, path){
         Helpers.exec("identify " + path, cb)
       })
     },
     "resizes images when size is passed": function(err, stdout, stderr) {
       assert.ok(typeof stdout != 'undefined')
-      assert.includes(stdout, '100x37')
+      assert.includes(stdout, '100x40')
     }
   },
   "#fit": {
