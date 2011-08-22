@@ -19,6 +19,18 @@ vows.describe('image-magick').addBatch({
       assert.throws( function(){ im.resize({url: Helpers.testImagePath}, function(){}) }, /size-param/ )
     }
   },
+  "#resize with url": {
+    topic: function() {
+      var cb = this.callback
+      im.resize({size: '100x100', url: "http://de.dawanda.com/images/logo_dawanda.gif"}, function(err, path){
+        Helpers.exec("identify " + path, cb)
+      })
+    },
+    "resizes images when size is passed": function(err, stdout, stderr) {
+      assert.ok(typeof stdout != 'undefined')
+      assert.includes(stdout, '100x37')
+    }
+  },
   "#fit": {
     topic: function() {
       var cb = this.callback
