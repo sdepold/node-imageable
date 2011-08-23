@@ -31,6 +31,18 @@ vows.describe('image-magick').addBatch({
       assert.includes(stdout, '100x40')
     }
   },
+  "#resize with big image": {
+    topic: function() {
+      var cb = this.callback
+      im.resize({size: '640x480', url: "http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg"}, function(err, path){
+        Helpers.exec("identify " + path, cb)
+      })
+    },
+    "resizes images when size is passed": function(err, stdout, stderr) {
+      assert.ok(typeof stdout != 'undefined')
+      assert.includes(stdout, '640x427')
+    }
+  },
   "#fit": {
     topic: function() {
       var cb = this.callback
