@@ -1,0 +1,130 @@
+/* main.css */
+body {
+	font-family: Georgia, Times, serif;
+	background: #FFF;
+	margin: 0px;
+	color: #333;
+}
+h1, h2, h3 {
+	font-weight:normal;
+}
+h1 {
+	font-size:36px;
+}
+h2 {
+	margin: 10px 0px;
+	font-size: 22px;
+}
+a:link, a:visited {
+	color:#3C6A8F;
+	text-decoration: underline;
+}
+a:hover {
+	color:#333;
+	text-decoration: underline;
+}
+a img {
+	border:1px solid #E5E5E5;
+}
+#container {
+	width: 100%;
+}
+#header_holder {
+	text-align:center;
+	border-bottom: 1px solid #E5E5E5;
+}
+#header {
+	margin: 0px auto;
+	width: 986px;
+	text-align:left;
+	position:relative;
+	background:#FFF;
+}
+#logo {
+	position: absolute;
+	top: -10px;
+	z-index: 100;
+	cursor: pointer;
+}
+#header h1 {
+	color:#797979;
+	padding: 0px;
+	margin: 0px 0px 10px 250px;
+}
+#header h1 a {
+	text-decoration: none;
+}
+#dawanda_nav h1 {
+	font-size:30px;
+	color: #999;
+}
+#dawanda_nav h1 a {
+	width: 100px;
+}
+#dawanda_nav h1 span.description {
+	font-size: 12px;
+	margin-left: 5px;
+}
+.dawanda_nav_close {
+	height: 10px;
+}
+.dawanda_nav_close a {
+	width: 100%;
+	border-top: 1px solid #E5E5E5;
+	text-decoration: none;
+	color: #666;
+	display:block;
+	height: 10px;
+	font-size: 11px;
+}
+.dawanda_nav_close a:hover {
+	background:#F4F4F4;
+}
+#est {
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
+#footer {
+	border-top: 1px solid #E5E5E5;
+	text-align:center;
+	padding: 10px;
+	font-size: 11px;
+	color: #444;
+}
+#footer .quirkey_links {
+	font-size: 14px;
+}
+#footer .quirkey_links span {
+	padding: 0px 5px;
+	color: #999;
+}
+#main {
+	width: 986px;
+	position: relative;
+	margin: 30px auto;
+}
+#main h2 {
+	margin-top: 30px;
+}
+.clear {
+	font-size: 1px;
+	line-height: 0px;
+	clear:both;
+}
+.q_code, a.q_code:link, a.q_code:visited {
+	color: #EADA68;
+}
+.q_portfolio, a.q_portfolio:link, a.q_portfolio:visited {
+	color: #B76C29;
+}
+.q_log, a.q_log:link, a.q_log:visited {
+	color: #22395B;
+}
+.q_blog, a.q_blog:link, a.q_blog:visited {
+	color: #3C6A8F;
+}
+.q_com, a.q_com:link, a.q_com:visited {
+	color: #72391E;
+}

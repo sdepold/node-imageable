@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>.: DaWanda.com  - {{ page.title }} </title>
+  <link rel="stylesheet" href="stylesheets/main.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="stylesheets/syntax.css" type="text/css" media="screen" charset="utf-8" />
+  <script src="javascripts/jquery-1.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="javascripts/dawanda.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+  <a href="http://github.com/dawanda/{{ page.github_name}}"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:50;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub" /></a>
+  <div id="container">
+    <div id="header_holder">
+      <div id="header">
+        <div id="logo" class="dawanda_nav_open"><img src="images/logo_dawanda.gif" width="227" height="85" alt="Logo"/></div>
+        <h1>DaWanda OpenSource</h1>
+      </div>
+      <div class="dawanda_nav_close" style="display:none;"><a href="#">^</a></div>
+    </div>
+    <div id="main">
+        {% if page.current_version %}
+        <div id="latest_version"><a href="#installing">{{ page.current_version }}</a></div>
+        {% endif %}
+        {% if page.nav %}
+        <ul id="pagenav">
+          {% for nav in page.nav %}
+          <li><a href="{{ nav['link'] }}">{{ nav['name'] }}</a></li>
+          {% endfor %}
+          <li><a href="#installing">Installing</a></li>
+          <li><a href="#requests">Bugs/Feature<br />Requests</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        {% endif %}
+      <div id="content">
+        {{ content }}
+        {% if page.github_name != 'home' %}
+        <h3 id="installing">Installing</h3>
+        <div class="highlight"><pre>sudo gem install {{ page.github_name }}
+        </pre></div>
+        <p>Or directly from github:</p>
+        <div class="highlight"><pre>sudo gem install {{ page.github_name }} -s http://gems.github.com
+        </pre></div>
+        {% if page.plugin %}
+        <p>You can also install it as a rails plugin:</p>
+        <div class="highlight"><pre>./script/plugin install git://github.com/dawanda/{{ page.github_name }}.git
+        </pre></div>
+        {% endif %}
+        <p>Github in their infinite awesomeness also lets you download the source in multiple formats.</p>
+        <div class="download">
+          <a href="http://github.com/dawanda/{{ page.github_name }}/zipball/master">
+            <img border="0" width="90" src="http://github.com/images/modules/download/zip.png" />
+          </a>
+          <a href="http://github.com/dawanda/{{ page.github_name }}/tarball/master">
+            <img border="0" width="90" src="http://github.com/images/modules/download/tar.png" />
+          </a>
+        </div>
+        <h3 id="requests">Bugs/Feature Requests</h3>
+        <p>The full and most up to date source is at github:</p>
+        <p><a href="http://github.com/dawanda/{{ page.github_name }}/">http://github.com/dawanda/{{ page.github_name }}/</a></p>
+        <p>You can clone or fork from there to fix or break the code.</p>
+        <p>I&#8217;m happy to take feature requests/bug reports. Just email me (contact below) or message me on github.</p>
+        <h3 id="license">License</h3>
+        <p>This code is free to use under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php"><span class="caps">MIT</span> license.</a></p>
+        <h3 id="contact">Contact</h3>
+        <p>Feel free to email us at cupcakes at dawanda dot com.</p>
+        <p>Please check out our <a href="http://dev.dawanda.in"> developers blog.</a></p>
+        {% endif %}
+      </div>
+    </div>
+    <div id="footer">
+      <p class="dawanda_links">DaWanda<span>|</span><a href="http://dev.dawanda.in" class="q_blog">Blog</a></p>
+      <p id="copy">&copy; 2006-2011 DaWanda GmbH</p>
+    </div>
+  </div>
+  </body>
+</html>
