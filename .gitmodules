@@ -1,0 +1,3 @@
+[submodule "project_theme"]
+	path = project_theme
+	url = git://github.com/dawanda/project_theme.git
