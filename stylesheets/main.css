@@ -1,12 +1,12 @@
 /* main.css */
 body {
 	font-family: Georgia, Times, serif;
-	background: #FFF;
+	background: #fff;
 	margin: 0px;
 	color: #333;
 }
 h1, h2, h3 {
-	font-weight:normal;
+	font-weight:bold;
 }
 h1 {
 	font-size:36px;
@@ -17,14 +17,10 @@ h2 {
 }
 a:link, a:visited {
 	color:#3C6A8F;
-	text-decoration: underline;
 }
 a:hover {
 	color:#333;
 	text-decoration: underline;
-}
-a img {
-	border:1px solid #E5E5E5;
 }
 #container {
 	width: 100%;
@@ -42,7 +38,7 @@ a img {
 }
 #logo {
 	position: absolute;
-	top: -10px;
+	top: -5px;
 	z-index: 100;
 	cursor: pointer;
 }

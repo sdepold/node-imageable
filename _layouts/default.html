@@ -18,27 +18,30 @@
     <div id="header_holder">
       <div id="header">
         <div id="logo" class="dawanda_nav_open"><img src="images/logo_dawanda.gif" width="227" height="85" alt="Logo"/></div>
-        <h1>DaWanda OpenSource</h1>
+        <h1>DaWanda OpenSource <br/> {{ page.title }}</h1>
       </div>
       <div class="dawanda_nav_close" style="display:none;"><a href="#">^</a></div>
     </div>
     <div id="main">
         {% if page.current_version %}
-        <div id="latest_version"><a href="#installing">{{ page.current_version }}</a></div>
+        <div id="latest_version"><a href="#installing">Current version: {{ page.current_version }}</a></div>
         {% endif %}
         {% if page.nav %}
         <ul id="pagenav">
           {% for nav in page.nav %}
           <li><a href="{{ nav['link'] }}">{{ nav['name'] }}</a></li>
           {% endfor %}
-          <li><a href="#installing">Installing</a></li>
+          {% if page.custom_install == nil %}
+            <li><a href="#installing">Installing</a></li>
+          {% endif %}
           <li><a href="#requests">Bugs/Feature<br />Requests</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
         {% endif %}
       <div id="content">
         {{ content }}
-        {% if page.github_name != 'home' %}
+        
+        {% if page.custom_install == nil %}
         <h3 id="installing">Installing</h3>
         <div class="highlight"><pre>sudo gem install {{ page.github_name }}
         </pre></div>
@@ -63,7 +66,7 @@
         <p>The full and most up to date source is at github:</p>
         <p><a href="http://github.com/dawanda/{{ page.github_name }}/">http://github.com/dawanda/{{ page.github_name }}/</a></p>
         <p>You can clone or fork from there to fix or break the code.</p>
-        <p>I&#8217;m happy to take feature requests/bug reports. Just email me (contact below) or message me on github.</p>
+        <p>We&#8217;re happy to take feature requests/bug reports. Send us an email (contact below) or a message on github.</p>
         <h3 id="license">License</h3>
         <p>This code is free to use under the terms of the <a href="http://www.opensource.org/licenses/mit-license.php"><span class="caps">MIT</span> license.</a></p>
         <h3 id="contact">Contact</h3>
