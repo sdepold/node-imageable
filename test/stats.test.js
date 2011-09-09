@@ -1,4 +1,4 @@
-const testfile = 'test/tmp/testfile'
+const testfile = __dirname + '/tmp/testfile'
 const config = {
   "interval": 10,
   "commands": [ "echo %{avg} >> " + testfile ]
