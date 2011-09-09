@@ -1,6 +1,6 @@
 var assert    = require('assert')
   , vows      = require('vows')
-  , Imageable = require('../lib/Imageable')
+  , Imageable = require('../lib/imageable')
 
 vows.describe('Imageable').addBatch({
 	'getImageProcessUrlMatch without namespacing': {
