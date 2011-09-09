@@ -4,7 +4,7 @@ var assert    = require('assert')
 
 vows.describe('Imageable').addBatch({
 	'getImageProcessUrlMatch without namespacing': {
-		topic: function() { return new Imageable({}) },
+		topic: function() { return new Imageable.RequestHandler({}) },
 		'returns a match array for valid urls': function(i) {
 			assert.ok(i.getImageProcessUrlMatch({ originalUrl: "/resize/123/foo.jpg" }) != null)
 		},
@@ -14,7 +14,7 @@ vows.describe('Imageable').addBatch({
 	},
 
 	'getImageProcessUrlMatch with namespacing': {
-		topic: function() { return new Imageable({namespace: 'foo'}) },
+		topic: function() { return new Imageable.RequestHandler({namespace: 'foo'}) },
 		'with namespacing': {
 			'returns a match array for valid urls': function(i) {
 				assert.ok(i.getImageProcessUrlMatch({ originalUrl: "/foo/resize/123/foo.jpg" }) != null)
@@ -25,7 +25,7 @@ vows.describe('Imageable').addBatch({
 		}
 	},
 	'isImageProcessUrl without namespacing': {
-		topic: function() { return new Imageable({}) },
+		topic: function() { return new Imageable.RequestHandler({}) },
 		'returns a match array for valid urls': function(i) {
 			assert.ok(i.isImageProcessUrl({ originalUrl: "/resize/123/foo.jpg" }))
 		},
@@ -34,7 +34,7 @@ vows.describe('Imageable').addBatch({
 		}
 	},
 	'isImageProcessUrl with namespacing': {
-		topic: function() { return new Imageable({namespace: 'foo'}) },
+		topic: function() { return new Imageable.RequestHandler({namespace: 'foo'}) },
 		'returns a match array for valid urls': function(i) {
 			assert.ok(i.isImageProcessUrl({ originalUrl: "/foo/resize/123/foo.jpg" }))
 		},
@@ -43,13 +43,13 @@ vows.describe('Imageable').addBatch({
 		}
 	},
 	'getImageProcessUrlRegExp without namespacing': {
-		topic: function(){ return new Imageable({}) },
+		topic: function(){ return new Imageable.RequestHandler({}) },
 		'returns the default url match regexp': function(i) {
 			assert.equal(i.getImageProcessUrlRegExp(), "/^/(resize|crop|fit)(/([^/?]+))?/")
 		}
 	},
 	'getImageProcessUrlRegExp with namespacing': {
-		topic: function(){ return new Imageable({namespace: 'foo'}) },
+		topic: function(){ return new Imageable.RequestHandler({namespace: 'foo'}) },
 		'returns namespaced url match regexp': function(i) {
 			assert.equal(i.getImageProcessUrlRegExp(), "/^/foo/(resize|crop|fit)(/([^/?]+))?/")
 		}
