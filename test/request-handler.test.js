@@ -122,6 +122,60 @@ vows.describe('RequestHandler').addBatch({
         assert.equal(i.isImageSourceHostTrusted(req2), false)
       }
     }
+  },
+
+  '_isValidHash': {
+    topic: function() {
+      return new RequestHandler({
+        secret:       "my-very-secret-secret",
+        magicHash:    "magic",
+        whitelist: { trustedHosts: [/^.*\.google\.com$/] }
+      })
+    },
+    'returns true for the magic hash': function(i) {
+      var imgUrl = encodeURIComponent("http://www.example.com/intl/en_ALL/images/logo.gif")
+        , hash   = i.config.magicHash
+        , reqUrl = "http://host.com/resize/" + hash + "/foo.jpg?url=" + imgUrl
+        , parsed = require("url").parse(reqUrl, true)
+        , req    = { originalUrl: parsed.pathname + parsed.search, query: parsed.query }
+
+      assert.ok(i._isValidHash(req))
+    },
+    'returns true for the correct hash': function(i) {
+      var imgUrl = encodeURIComponent("http://www.example.com/intl/en_ALL/images/logo.gif")
+        , hash   = i.utils.hash("url=" + imgUrl)
+        , reqUrl = "http://host.com/resize/" + hash + "/foo.jpg?url=" + imgUrl
+        , parsed = require("url").parse(reqUrl, true)
+        , req    = { originalUrl: parsed.pathname + parsed.search, query: parsed.query }
+
+      assert.ok(i._isValidHash(req))
+    },
+    'returns false for the incorrect hash': function(i) {
+      var imgUrl = encodeURIComponent("http://www.example.com/intl/en_ALL/images/logo.gif")
+        , hash   = "xxx"
+        , reqUrl = "http://host.com/resize/" + hash + "/foo.jpg?url=" + imgUrl
+        , parsed = require("url").parse(reqUrl, true)
+        , req    = { originalUrl: parsed.pathname + parsed.search, query: parsed.query }
+
+      assert.equal(i._isValidHash(req), false)
+    },
+    'returns true for trusted hosts': function(i) {
+      var imgUrl = encodeURIComponent("http://www.google.com/intl/en_ALL/images/logo.gif")
+        , hash   = "xxx"
+        , reqUrl = "http://host.com/resize/" + hash + "/foo.jpg?url=" + imgUrl
+        , parsed = require("url").parse(reqUrl, true)
+        , req    = { originalUrl: parsed.pathname + parsed.search, query: parsed.query }
+
+      assert.ok(i._isValidHash(req))
+    },
+    'returns true for trusted hosts without hash': function(i) {
+      var imgUrl = encodeURIComponent("http://www.google.com/intl/en_ALL/images/logo.gif")
+        , reqUrl = "http://host.com/resize/foo.jpg?url=" + imgUrl
+        , parsed = require("url").parse(reqUrl, true)
+        , req    = { originalUrl: parsed.pathname + parsed.search, query: parsed.query }
+
+      assert.ok(i._isValidHash(req))
+    }
   }
 
 }).exportTo(module)
