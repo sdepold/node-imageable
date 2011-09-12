@@ -79,12 +79,12 @@ vows.describe('RequestHandler').addBatch({
       'returns true if image source is allowed': function(i) {
         var req = {query: {url: 'http://www.example.com/foo.jpg'}}
 
-        assert.ok(i.isImageSourceHostWhitelisted(req))
+        assert.ok(i.isImageSourceHostAllowed(req))
       },
       'returns false if image source is not allowed': function(i) {
         var req = {query: {url: 'http://www.google.com/foo.jpg'}}
 
-        assert.equal(i.isImageSourceHostWhitelisted(req), false)
+        assert.equal(i.isImageSourceHostAllowed(req), false)
       }
     },
 
@@ -94,8 +94,8 @@ vows.describe('RequestHandler').addBatch({
         var req1 = {query: {url: 'http://www.google.com/foo.jpg'}}
           , req2 = {query: {url: 'http://www.example.com/foo.jpg'}}
 
-        assert.ok(i.isImageSourceHostWhitelisted(req1))
-        assert.ok(i.isImageSourceHostWhitelisted(req2))
+        assert.ok(i.isImageSourceHostAllowed(req1))
+        assert.ok(i.isImageSourceHostAllowed(req2))
       }
     }
   }
