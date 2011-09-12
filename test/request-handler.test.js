@@ -66,36 +66,60 @@ vows.describe('RequestHandler').addBatch({
     }
   },
 
-  'isImageSourceHostWhitelisted': {
+  'isImageSourceHostAllowed': {
     'with allowedHosts': {
       topic: function(){
         return new RequestHandler({
-          'whitelist': {
-            'allowedHosts': [/^.*\.example\.com$/],
-            'trustedHosts': []
-          }
+          'whitelist': { 'allowedHosts': [/^.*\.example\.com$/] }
         })
       },
       'returns true if image source is allowed': function(i) {
         var req = {query: {url: 'http://www.example.com/foo.jpg'}}
-
         assert.ok(i.isImageSourceHostAllowed(req))
       },
       'returns false if image source is not allowed': function(i) {
         var req = {query: {url: 'http://www.google.com/foo.jpg'}}
-
         assert.equal(i.isImageSourceHostAllowed(req), false)
       }
     },
 
     'without allowedHosts': {
       topic: function() { return new RequestHandler({}) },
-      'returns true for every urls': function(i) {
+      'returns true for every url': function(i) {
         var req1 = {query: {url: 'http://www.google.com/foo.jpg'}}
           , req2 = {query: {url: 'http://www.example.com/foo.jpg'}}
 
         assert.ok(i.isImageSourceHostAllowed(req1))
         assert.ok(i.isImageSourceHostAllowed(req2))
+      }
+    }
+  },
+
+  'isImageSourceHostTrusted': {
+    'with trustedHosts': {
+      topic: function(){
+        return new RequestHandler({
+          'whitelist': { 'trustedHosts': [/^.*\.example\.com$/] }
+        })
+      },
+      'returns true if image source is trusted': function(i) {
+        var req = {query: {url: 'http://www.example.com/foo.jpg'}}
+        assert.ok(i.isImageSourceHostTrusted(req))
+      },
+      'returns false if image source is not trusted': function(i) {
+        var req = {query: {url: 'http://www.google.com/foo.jpg'}}
+        assert.equal(i.isImageSourceHostTrusted(req), false)
+      }
+    },
+
+    'without trustedHosts': {
+      topic: function() { return new RequestHandler({}) },
+      'returns false for every url': function(i) {
+        var req1 = {query: {url: 'http://www.google.com/foo.jpg'}}
+          , req2 = {query: {url: 'http://www.example.com/foo.jpg'}}
+
+        assert.equal(i.isImageSourceHostTrusted(req1), false)
+        assert.equal(i.isImageSourceHostTrusted(req2), false)
       }
     }
   }
