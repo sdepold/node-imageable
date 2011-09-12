@@ -1,6 +1,6 @@
 # What is imageable doing?
 
-You can put imageable into your express application, where it acts as middleware.
+You can put imageable into your express application, where it acts as middleware.  
 Calling specific URLs (look below) will return resized and cropped images.
 
 # How to get it run.
@@ -16,24 +16,11 @@ In your express app you will find a section like this:
 
 To plug imageable into your app, just add the following ABOVE the router:
 
-    app.use(imageable({
-      "secret":       "my-very-secret-secret",
-      "magicHash":    "magic",
-      "namespace":    "",
-      "maxListeners": 512
-    }, {
-      before: function(stats) { console.log('before') },
-      after: function(stats, returnValueOfBefore) { console.log('after') }
-    }))
-
-Notice that the after-callback will have the returned value of the before-callback as
-first parameter. Using that mechanism, you can for example track the image processing
-duration. The middleware will automatically track some statistics, such as request,
-average processing time etc.
+    app.use(imageable(config, options))
 
 Here is what an app should look like:
 
-    # app.js
+## app.js ##
     var fs     = require("fs")
       , config = JSON.parse(fs.readFileSync(__dirname + "/config/config.json"))
 
@@ -46,8 +33,15 @@ Here is what an app should look like:
       }))
       app.use(app.router)
     })
+    
+Notice that the after-callback will have the returned value of the before-callback as
+second parameter. Using that mechanism, you can for example track custom statistics.
 
-    # config/config.json
+The middleware will automatically track some statistics, such as request,
+average processing time etc. You can access them via the stats parameter.
+    
+
+## config/config.json ##
     {
       "secret":       "my-very-secret-secret",
       "magicHash":    "magic",
@@ -56,13 +50,19 @@ Here is what an app should look like:
       "reporting": {
         "interval": 10,
         "commands": [
-          'curl http://foo.bar.org/report?avg=%{avg}',
-          'curl http://foo.bar.org/report?count=%{count}'
+          'curl -s http://foo.bar.org/report?avg=%{avg}',
+          'curl -s http://foo.bar.org/report?count=%{count}'
         ]
+      },
+      "whitelist": {
+        "allowedHosts": [".*google\.com", ".*facebook\.com"],
+        "trustedHosts": [".*google\.com"]
       }
     }
 
-The reporting config defines an array of commands which will get executed each _interval_ seconds.
+The reporting config defines an array of commands which will get executed each _interval_ seconds  
+The whitelist config allows you furthermore to limit the hosts of image sources (allowedHosts) or
+to trust specific hosts (trustedHosts), so you don't have to specify the hash of the params (see below).  
 You can also take a look at https://github.com/dawanda/node-imageable-server to get a further clue.
 
 # Routes and namespacing
