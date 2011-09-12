@@ -112,6 +112,20 @@ vows.describe('RequestHandler').addBatch({
       }
     },
 
+    'with trustedHosts as string': {
+      topic: function() {
+        return new RequestHandler({'whitelist': {'trustedHosts': ["^.*\.example\.com$"]}})
+      },
+      'returns true if image source is trusted': function(i) {
+        var req = {query: {url: 'http://www.example.com/foo.jpg'}}
+        assert.ok(i.isImageSourceHostTrusted(req))
+      },
+      'returns false if image source is not trusted': function(i) {
+        var req = {query: {url: 'http://www.google.com/foo.jpg'}}
+        assert.equal(i.isImageSourceHostTrusted(req), false)
+      }
+    },
+
     'without trustedHosts': {
       topic: function() { return new RequestHandler({}) },
       'returns false for every url': function(i) {
