@@ -1,0 +1,6 @@
+# v0.7.0 #
+- throwing an error if evil characters are passed in the url
+- added imageSizeLimit for a specific limit of processing dimension
+
+# v0.6.2 #
+- added MIT license
