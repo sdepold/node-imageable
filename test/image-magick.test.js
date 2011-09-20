@@ -1,7 +1,8 @@
-var assert    = require('assert')
-  , vows      = require('vows')
-  , Helpers   = require("./helpers")
-  , im        = new (require('../lib/image-magick'))({})
+var assert      = require('assert')
+  , vows        = require('vows')
+  , Helpers     = require("./helpers")
+  , ImageMagick = require('../lib/image-magick')
+  , im          = new ImageMagick({})
 
 vows.describe('image-magick').addBatch({
   "#resize": {
@@ -94,6 +95,21 @@ vows.describe('image-magick').addBatch({
     "is generated for invalid sources": function(err, stdout, stderr) {
       assert.ok(typeof stdout != 'undefined')
       assert.includes(stdout, '100x200')
+    }
+  },
+  '#resize with size and config': {
+    topic: function() {
+      return new ImageMagick({imageSizeLimit: 1000})
+    },
+    'should work when size is below limit': function(im) {
+      assert.doesNotThrow(function () {
+        im.resize({url: Helpers.testImagePath, size: '100x200'})
+      }, Error);
+    },
+    'should throw an error when size is above limit': function(im) {
+      assert.throws(function () {
+        im.resize({url: Helpers.testImagePath, size: '1100x200'})
+      }, Error);
     }
   }
 }).addBatch(Helpers.clearTmpFolderBatch).exportTo(module)

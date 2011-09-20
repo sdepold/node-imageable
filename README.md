@@ -1,6 +1,6 @@
 # What is imageable doing?
 
-You can put imageable into your express application, where it acts as middleware.  
+You can put imageable into your express application, where it acts as middleware.
 Calling specific URLs (look below) will return resized and cropped images.
 
 # How to get it run.
@@ -33,13 +33,13 @@ Here is what an app should look like:
       }))
       app.use(app.router)
     })
-    
+
 Notice that the after-callback will have the returned value of the before-callback as
 second parameter. Using that mechanism, you can for example track custom statistics.
 
 The middleware will automatically track some statistics, such as request,
 average processing time etc. You can access them via the stats parameter.
-    
+
 
 ## config/config.json ##
     {
@@ -47,6 +47,7 @@ average processing time etc. You can access them via the stats parameter.
       "magicHash":    "magic",
       "namespace":    "",
       "maxListeners": 512,
+      "imageSizeLimit": 1024,
       "reporting": {
         "interval": 10,
         "commands": [
@@ -60,9 +61,10 @@ average processing time etc. You can access them via the stats parameter.
       }
     }
 
-The reporting config defines an array of commands which will get executed each _interval_ seconds  
+The reporting config defines an array of commands which will get executed each _interval_ seconds.<br/>
 The whitelist config allows you furthermore to limit the hosts of image sources (allowedHosts) or
-to trust specific hosts (trustedHosts), so you don't have to specify the hash of the params (see below).  
+to trust specific hosts (trustedHosts), so you don't have to specify the hash of the params (see below).<br/>
+The imageSizeLimit config can be used to specify a dimension limit. Setting it to 1024 will throw an error for requests like 1500x900.<br/>
 You can also take a look at https://github.com/dawanda/node-imageable-server to get a further clue.
 
 # Routes and namespacing
