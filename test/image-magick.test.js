@@ -1,7 +1,7 @@
 var assert    = require('assert')
   , vows      = require('vows')
   , Helpers   = require("./helpers")
-  , im        = require('../lib/image-magick')
+  , im        = new (require('../lib/image-magick'))({})
 
 vows.describe('image-magick').addBatch({
   "#resize": {
