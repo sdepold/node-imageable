@@ -111,5 +111,16 @@ vows.describe('image-magick').addBatch({
         im.resize({url: Helpers.testImagePath, size: '1100x200'})
       }, Error);
     }
+  },
+  'templates': {
+    topic: ImageMagick.Templates,
+    'get': {
+      'throws error if evil commands characters are detected': function(t) {
+        assert.throws(function() { t.get('resizeCmd', {size: '300x200"; rm -rf /'}) }, Error)
+      },
+      'works nicely if no evil commands characters are detected': function(t) {
+        assert.doesNotThrow(function() { t.get('resizeCmd', {size: '300x200'}) }, Error)
+      }
+    }
   }
 }).addBatch(Helpers.clearTmpFolderBatch).exportTo(module)
