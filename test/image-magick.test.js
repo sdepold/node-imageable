@@ -46,14 +46,28 @@ vows.describe('image-magick').addBatch({
       }
     },
     'with configured timeouts': {
-      topic: function() {
-        var cb = this.callback
-          , im = new ImageMagick({timeouts: {convert: 200}})
+      'for convert': {
+        topic: function() {
+          var cb = this.callback
+            , im = new ImageMagick({timeouts: {convert: 200}})
 
-        im.resize({size: '640x480', url: "http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg"}, cb)
+          im.resize({size: '640x480', url: "http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg"}, cb)
+        },
+        "resizes images when size is passed": function(err, stdout, stderr) {
+          assert.ok(err.killed)
+        }
       },
-      "resizes images when size is passed": function(err, stdout, stderr) {
-        assert.ok(err.killed)
+      'for download': {
+        topic: function() {
+          var cb = this.callback
+            , im = new ImageMagick({timeouts: {download: 800}})
+
+          im.resize({size: '640x480', url: "http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg"}, cb)
+        },
+        "resizes images when size is passed": function(err, stdout, stderr) {
+          assert.ok(err.killed)
+        }
+
       }
     }
   },
