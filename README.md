@@ -48,6 +48,11 @@ average processing time etc. You can access them via the stats parameter.
       "namespace":    "",
       "maxListeners": 512,
       "imageSizeLimit": 1024,
+      "timeouts": {
+        convert: 5000,
+        identify: 100,
+        download: 1000
+      }
       "reporting": {
         "interval": 10,
         "commands": [
@@ -65,6 +70,7 @@ The reporting config defines an array of commands which will get executed each _
 The whitelist config allows you furthermore to limit the hosts of image sources (allowedHosts) or
 to trust specific hosts (trustedHosts), so you don't have to specify the hash of the params (see below).<br/>
 The imageSizeLimit config can be used to specify a dimension limit. Setting it to 1024 will throw an error for requests like 1500x900.<br/>
+The timeouts config can be used to cancel slow downloads, long running converts or identify commands. Values are in milliseconds.<br/>
 You can also take a look at https://github.com/dawanda/node-imageable-server to get a further clue.
 
 # Routes and namespacing
