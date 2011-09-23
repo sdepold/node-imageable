@@ -33,15 +33,28 @@ vows.describe('image-magick').addBatch({
     }
   },
   "#resize with big image": {
-    topic: function() {
-      var cb = this.callback
-      im.resize({size: '640x480', url: "http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg"}, function(err, path){
-        Helpers.exec("identify " + path, cb)
-      })
+    'without configured timeouts': {
+      topic: function() {
+        var cb = this.callback
+        im.resize({size: '640x480', url: "http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg"}, function(err, path){
+          Helpers.exec("identify " + path, cb)
+        })
+      },
+      "resizes images when size is passed": function(err, stdout, stderr) {
+        assert.ok(typeof stdout != 'undefined')
+        assert.includes(stdout, '640x427')
+      }
     },
-    "resizes images when size is passed": function(err, stdout, stderr) {
-      assert.ok(typeof stdout != 'undefined')
-      assert.includes(stdout, '640x427')
+    'with configured timeouts': {
+      topic: function() {
+        var cb = this.callback
+          , im = new ImageMagick({timeouts: {convert: 200}})
+
+        im.resize({size: '640x480', url: "http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg"}, cb)
+      },
+      "resizes images when size is passed": function(err, stdout, stderr) {
+        assert.ok(err.killed)
+      }
     }
   },
   "#fit": {
