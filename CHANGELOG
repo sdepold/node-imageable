@@ -1,3 +1,8 @@
+# v0.7.2 #
+- added debugging -> set config.debug to true
+- added timeouts  -> set config.timeouts to {identify: 100, convert: 200, download: 300}
+- removed socket timeout
+
 # v0.7.0, v0.7.1 #
 - throwing an error if evil characters are passed in the url
 - added imageSizeLimit for a specific limit of processing dimension

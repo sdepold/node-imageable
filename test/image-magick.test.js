@@ -40,7 +40,6 @@ vows.describe('image-magick').addBatch({
       })
     },
     "resizes images when size is passed": function(err, stdout, stderr) {
-      console.log(err, stdout, stderr)
       assert.ok(typeof stdout != 'undefined')
       assert.includes(stdout, '640x427')
     }
