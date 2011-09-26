@@ -14,7 +14,9 @@
   "engines": {
     "node": ">=v0.4.7"
   },
-  "dependencies": {},
+  "dependencies": {
+    "identify.js": ">=0.1.2"
+  },
   "devDependencies": {
     "vows": ">=0.5.8"
   }
