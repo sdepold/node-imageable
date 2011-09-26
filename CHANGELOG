@@ -1,3 +1,6 @@
+# 0.8.0 #
+- added identify route for identifying paths
+
 # v0.7.2 #
 - added debugging -> set config.debug to true
 - added timeouts  -> set config.timeouts to {identify: 100, convert: 200, download: 300}
