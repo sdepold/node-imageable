@@ -54,14 +54,14 @@ vows.describe('RequestHandler').addBatch({
     'without namespacing': {
       topic: function(){ return new RequestHandler({}) },
       'returns the default url match regexp': function(i) {
-        assert.equal(i.getImageProcessUrlRegExp(), "/^/(resize|crop|fit)(/([^/?]+))?/")
+        assert.equal(i.getImageProcessUrlRegExp(), "/^/(identify|resize|crop|fit)(/([^/?]+))?/")
       }
     },
 
     'with namespacing': {
       topic: function(){ return new RequestHandler({namespace: 'foo'}) },
       'returns namespaced url match regexp': function(i) {
-        assert.equal(i.getImageProcessUrlRegExp(), "/^/foo/(resize|crop|fit)(/([^/?]+))?/")
+        assert.equal(i.getImageProcessUrlRegExp(), "/^/foo/(identify|resize|crop|fit)(/([^/?]+))?/")
       }
     }
   },
