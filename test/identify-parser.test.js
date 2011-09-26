@@ -30,6 +30,12 @@ vows.describe('identify-parser').addBatch({
       }
 
       assert.deepEqual(IdentifyParser.parse(nested), object)
+    },
+    "should parse double nesting": function() {
+      assert.deepEqual(IdentifyParser.parse('head: line\n  foo:\n    bar:\n      hello: world\n'), {foo:{bar:{hello: 'world'}}})
+    },
+    "should ignore empty lines": function() {
+      assert.deepEqual(IdentifyParser.parse("head: line\n  a: b\n  \n  \n"), {a:'b'})
     }
   }
 }).exportTo(module)
