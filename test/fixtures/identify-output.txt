@@ -1,0 +1,76 @@
+Image: ps_logo2.png
+  Base filename: ps_logo2.png
+  Format: PNG (Portable Network Graphics)
+  Class: DirectClass
+  Geometry: 364x126+0+0
+  Resolution: 118.11x118.11
+  Print size: 3.08187x1.0668
+  Units: PixelsPerCentimeter
+  Type: TrueColor
+  Endianess: Undefined
+  Colorspace: RGB
+  Depth: 8-bit
+  Channel depth:
+    red: 8-bit
+    green: 8-bit
+    blue: 8-bit
+  Channel statistics:
+    Red:
+      min: 0 (0)
+      max: 255 (1)
+      mean: 227.101 (0.890591)
+      standard deviation: 63.3476 (0.248422)
+      kurtosis: 3.83052
+      skewness: -2.28506
+    Green:
+      min: 1 (0.00392157)
+      max: 255 (1)
+      mean: 222.02 (0.870666)
+      standard deviation: 64.2598 (0.251999)
+      kurtosis: 2.07629
+      skewness: -1.82869
+    Blue:
+      min: 0 (0)
+      max: 255 (1)
+      mean: 225.506 (0.884339)
+      standard deviation: 65.919 (0.258506)
+      kurtosis: 4.0766
+      skewness: -2.33591
+  Image statistics:
+    Overall:
+      min: 0 (0)
+      max: 255 (1)
+      mean: 224.876 (0.881865)
+      standard deviation: 64.5176 (0.25301)
+      kurtosis: 3.33302
+      skewness: -2.15424
+  Rendering intent: Undefined
+  Interlace: None
+  Background color: white
+  Border color: rgb(223,223,223)
+  Matte color: grey74
+  Transparent color: black
+  Compose: Over
+  Page geometry: 364x126+0+0
+  Dispose: Undefined
+  Iterations: 0
+  Compression: Zip
+  Orientation: Undefined
+  Properties:
+    date:create: 2011-09-26T10:58:37+02:00
+    date:modify: 2011-09-26T10:58:37+02:00
+    PNG:IHDR.bit_depth       : 8
+    PNG:IHDR.color_type      : 2
+    PNG:IHDR.interlace_method: 0
+    PNG:IHDR.width,height    : 364, 126
+    PNG:pHYs                 : x_res=11811, y_res=11811, units=1
+    signature: 08ea7ba0e915d2e311260037ed8c51eba5e551c43832afe6aae905fce541d79f
+  Artifacts:
+    verbose: true
+  Tainted: False
+  Filesize: 26.2KBB
+  Number pixels: 45.9KB
+  Pixels per second: 4.586MB
+  User time: 0.000u
+  Elapsed time: 0:01.009
+  Version: ImageMagick 6.6.9-4 2011-06-20 Q16 http://www.imagemagick.org

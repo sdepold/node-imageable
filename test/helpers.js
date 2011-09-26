@@ -8,9 +8,9 @@ var Helpers = module.exports = {
     magicHash : "magic",
     port : 3000
   }),
-  
+
   serverRequests: 0,
- 
+
   clearTmpFolders: function() {
     Helpers.exec('rm ' + process.cwd() + "/test/tmp/*")
     Helpers.exec('rm ' + process.cwd() + "/../tmp/*")
@@ -24,7 +24,7 @@ var Helpers = module.exports = {
       'make it so': function(){}
     }
   },
-  
+
   /*
     path: the path you want to request
     _options: a hash with options, possible options:
@@ -45,7 +45,7 @@ var Helpers = module.exports = {
       app.listen(port)
       console.log("Express server listening on port %d", app.address().port)
     }
-    
+
     Helpers.exec(cmd, function(err, stdout, stderr) {
       callback && callback(err, stdout, stderr)
       if(--Helpers.serverRequests == 0) {
@@ -65,5 +65,5 @@ Helpers.__defineGetter__('testImageTargetPath', function() {
 })
 
 Helpers.__defineGetter__('testImagePath', function() {
-  return process.cwd() + "/test/assets/test.jpg"
+  return process.cwd() + "/test/fixtures/test.jpg"
 })
