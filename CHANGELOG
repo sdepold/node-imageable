@@ -1,3 +1,6 @@
+# 0.8.2 #
+- added possibility to scale the cropping clip
+
 # 0.8.0 #
 - added identify route for identifying paths
 
