@@ -134,6 +134,7 @@ To make sure nobody missuses your image-server you can enable hashing in the con
 
  - add 'expand' which would add whitespace to fill missing image areas
 
-# Authors
+# Authors/Contributors
 
-DaWanda GmbH
+- DaWanda GmbH
+- Sascha Depold ([Twitter](http://twitter.com/sdepold) | [Github](http://github.com/sdepold) | [Website](http://depold.com))
