@@ -98,6 +98,10 @@ Here you can see the routes, imageable reacts on.
     # append any fancy name for nice looking urls and image downloads
     http://localhost:3000/fit/-hash-/Fancy-Ignored-Name.gif?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&size=200x200
 
+    # this is super edgy, but you can use it if you need it: scale the cropping clip according to another image dimension.
+    # this will calculate the ratio between the other image dimension and the passed (via url param) image's dimension and scale the cropping information (crop param)
+    http://localhost:3000/crop?url=http%3A%2F%2Fwww.google.com%2Fintl%2Fen_ALL%2Fimages%2Flogo.gif&crop=200x200%2B20%2B40&size=100x50&cropSourceSize=500x
+
 If you specify the namespace in your config (let's say to 'imageable'), all routes will be scoped to /imageable/fit... or /imageable/crop and so on.
 
 # Hashing
