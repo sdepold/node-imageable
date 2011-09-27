@@ -149,5 +149,10 @@ vows.describe('image-magick').addBatch({
         assert.doesNotThrow(function() { t.get('resizeCmd', {size: '300x200'}) }, Error)
       }
     }
+  },
+  '#_scaleCropInfo': {
+    'scales the passed cropping info according to source size': function() {
+      assert.equal(im._scaleCropInfo('200x300+10+10', ['375', ''], ['800', '600']), '426x640+21+21')
+    }
   }
 }).addBatch(Helpers.clearTmpFolderBatch).exportTo(module)
