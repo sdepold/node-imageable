@@ -1,3 +1,6 @@
+# 0.8.3 #
+- added error passing to after callback
+
 # 0.8.2 #
 - added possibility to scale the cropping clip
 
