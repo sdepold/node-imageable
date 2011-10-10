@@ -29,13 +29,15 @@ Here is what an app should look like:
       app.use(express.methodOverride())
       app.use(imageable(config, {
         before: function(stats) { console.log('before') },
-        after: function(stats, returnValueOfBefore) { console.log('after') }
+        after: function(stats, returnValueOfBefore, err) { console.log('after') }
       }))
       app.use(app.router)
     })
 
 Notice that the after-callback will have the returned value of the before-callback as
 second parameter. Using that mechanism, you can for example track custom statistics.
+The third parameter is furthermore containing an error if something went wrong. Nevertheless
+the error gets thrown to end the request.
 
 The middleware will automatically track some statistics, such as request,
 average processing time etc. You can access them via the stats parameter.
