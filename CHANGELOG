@@ -1,3 +1,6 @@
+# 0.8.6 #
+- pass request to after callback
+
 # 0.8.3, 0.8.4 #
 - added error passing to after callback
 
