@@ -17,7 +17,9 @@ vows.describe('image-magick').addBatch({
       assert.includes(stdout, '100x67')
     },
     "throws an error if size is not passed": function() {
-      assert.throws( function(){ im.resize({url: Helpers.testImagePath}, function(){}) }, /size-param/ )
+      assert.throws( function(){
+        im.resize({ url: Helpers.testImagePath }, function(){})
+      }, /size-param/ )
     }
   },
   "#resize with url": {
