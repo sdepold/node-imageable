@@ -32,6 +32,18 @@ vows.describe('image-magick').addBatch({
       assert.includes(stdout, '100x40')
     }
   },
+  "#resize with french url": {
+    topic: function() {
+      var cb = this.callback
+      im.resize({size: '100x100', url: "http://blog-fr.dawanda.com/wp-content/uploads/2012/01/Capture-d’écran-2012-01-19-à-11.27.07.png"}, function(err, path){
+        Helpers.exec("identify " + path, cb)
+      })
+    },
+    "resizes images when size is passed": function(err, stdout, stderr) {
+      assert.ok(typeof stdout != 'undefined')
+      assert.includes(stdout, '100x40')
+    }
+  },
   "#resize with big image": {
     'without configured timeouts': {
       topic: function() {

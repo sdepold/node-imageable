@@ -18,6 +18,7 @@
     "identify.js": ">=0.1.2"
   },
   "devDependencies": {
-    "vows": ">=0.5.8"
+    "vows": ">=0.5.8",
+    "mocha": "0.10.x"
   }
 }
