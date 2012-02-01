@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "vows": ">=0.5.8",
-    "mocha": "0.10.x"
+    "mocha": "0.10.x",
+    "should": "0.5.1"
   }
 }

@@ -1,20 +1,18 @@
-var assert = require("assert")
-
 describe('ImageMagick', function() {
   var ImageMagick = require("../lib/image-magick")
 
   describe('Templates', function() {
     describe('checkValue', function() {
       var checkForInvalidity = function(value) {
-        assert.throws(function() {
+        (function() {
           ImageMagick.Templates.checkValue(value)
-        }, "Invalid value was accepted! Not good! Value: " + value)
+        }).should.throw()
       }
 
       var checkForValidity = function(value) {
-        assert.doesNotThrow(function() {
+        (function() {
           ImageMagick.Templates.checkValue(value)
-        }, "Valid value was not accepted! Not good! Value: " + value)
+        }).should.not.throw()
       }
 
       it("doesn't allow semicolons", function() {
