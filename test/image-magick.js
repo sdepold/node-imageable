@@ -32,6 +32,7 @@ describe('ImageMagick', function() {
 
       it("allows french urls", function() {
         checkForValidity('http://blog.dawanda.com/wp-content/uploads/2012/01/àçèá.jpg')
+        checkForValidity('http://blog-fr.dawanda.com/wp-content/uploads/2012/01/Capture-d’écran-2012-01-19-à-11.27.07.png')
       })
 
       it("allows queries", function() {
