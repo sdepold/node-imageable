@@ -1,3 +1,7 @@
+# 0.8.7 #
+- moved from whitelisting characters in url to blacklisting
+- fixed french characters in urls
+
 # 0.8.6 #
 - pass request to after callback
 
