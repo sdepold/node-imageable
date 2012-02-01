@@ -65,5 +65,5 @@ Helpers.__defineGetter__('testImageTargetPath', function() {
 })
 
 Helpers.__defineGetter__('testImagePath', function() {
-  return process.cwd() + "/test/fixtures/test.jpg"
+  return process.cwd() + "/spec/fixtures/test.jpg"
 })
