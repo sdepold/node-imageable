@@ -62,34 +62,34 @@ describe('stats', function() {
   })
 
   describe('report', function() {
-    var buildStats = function() {
-      var testfile = __dirname + '/tmp/testfile-' + Math.floor(Math.random() * 9999)
+    beforeEach(function() {
+      testfile = __dirname + '/tmp/testfile-' + Math.floor(Math.random() * 9999)
 
-      return new Stats({
+      stats = new Stats({
         "interval": 10,
         "commands": [ "echo %{avg} >> " + testfile ],
         "testfile": testfile
       })
-    }
+    })
 
-    it("it executes all commands", function() {
-      var stats = buildStats()
+    afterEach(function() {
+      try { fs.unlinkSync(stats.config.testfile) } catch(e) { }
+    })
 
+    it("it executes all commands", function(done) {
       stats.report(function() {
         fs.readFileSync(stats.config.testfile).toString().should.equal('0\n')
-        try { fs.unlinkSync(stats.config.testfile) } catch(e) { }
+        done()
       })
     })
 
-    it("it executes all commands and inserts values", function() {
-      var stats = buildStats()
-
+    it("it executes all commands and inserts values", function(done) {
       stats.record(100)
       stats.record(50)
 
       stats.report(function() {
         fs.readFileSync(stats.config.testfile).toString().should.equal('75\n')
-        try { fs.unlinkSync(stats.config.testfile) } catch(e) { }
+        done()
       })
     })
   })
