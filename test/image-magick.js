@@ -1,6 +1,6 @@
-describe('ImageMagick', function() {
-  var ImageMagick = require("../lib/image-magick")
+const ImageMagick = require("../lib/image-magick")
 
+describe('ImageMagick', function() {
   describe('Templates', function() {
     describe('checkValue', function() {
       var checkForInvalidity = function(value) {
