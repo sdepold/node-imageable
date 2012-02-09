@@ -134,7 +134,7 @@ To make sure nobody missuses your image-server you can enable hashing in the con
 
 # Running the tests
 
-    node_modules/.bin/mocha -r should -t 5000
+    npm test
 
 # TODO
 

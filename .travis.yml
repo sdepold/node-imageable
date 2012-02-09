@@ -2,7 +2,7 @@ before_script:
   - "npm install"
 
 script:
-  - "node_modules/.bin/mocha -r should -t 5000"
+  - "npm test"
 
 notifications:
   email:
