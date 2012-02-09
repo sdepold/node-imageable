@@ -17,6 +17,9 @@
   "dependencies": {
     "identify.js": ">=0.1.2"
   },
+  "scripts": {
+    "test": "node_modules/.bin/mocha -r should -t 5000"
+  },
   "devDependencies": {
     "mocha": "0.10.x",
     "should": "0.5.1"
