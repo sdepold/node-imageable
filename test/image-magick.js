@@ -4,8 +4,9 @@ const ImageMagick    = require("../lib/image-magick")
     , frenchImage    = 'http://blog-fr.dawanda.com/wp-content/uploads/2012/01/Capture-d’écran-2012-01-19-à-11.27.07.png'
     , bigImage       = 'http://s31.dawandastatic.com/PressReleaseItem/0/818/1264780823-785.jpg'
     , localImage     = process.cwd() + "/test/fixtures/test.jpg"
+    , testTmpRoot    = process.cwd() + "/test/tmp"
     , clearTmpFolder = function() {
-        exec('rm ' + process.cwd() + "/test/tmp/*")
+        exec('rm -rf ' + testTmpRoot + "/*")
         exec('rm ' + process.cwd() + "/../tmp/*")
       }
 
@@ -31,7 +32,7 @@ describe('ImageMagick', function() {
   }
 
   beforeEach(function() {
-    imageMagick = new ImageMagick({})
+    imageMagick = new ImageMagick({"tmpPathRoot": testTmpRoot})
   })
 
   after(function() {
@@ -88,7 +89,7 @@ describe('ImageMagick', function() {
 
       describe('with configured timeouts for convert', function() {
         beforeEach(function() {
-          imageMagick = new ImageMagick({ timeouts: { convert: 100 } })
+          imageMagick = new ImageMagick({ timeouts: { convert: 100 }, tmpPathRoot: testTmpRoot })
         })
 
         it('resizes images when size is passed', function(done) {
@@ -101,7 +102,7 @@ describe('ImageMagick', function() {
 
       describe('with configured timeouts for resize', function() {
         beforeEach(function() {
-          imageMagick = new ImageMagick({ timeouts: { download: 100 } })
+          imageMagick = new ImageMagick({ timeouts: { download: 100 }, tmpPathRoot: testTmpRoot })
         })
 
         it('resizes images when size is passed', function(done) {
@@ -115,7 +116,7 @@ describe('ImageMagick', function() {
 
     describe('with size limit', function() {
       beforeEach(function() {
-        imageMagick = new ImageMagick({ imageSizeLimit: 1000 })
+        imageMagick = new ImageMagick({ imageSizeLimit: 1000, tmpPathRoot: testTmpRoot })
       })
 
       it('works when size is below limit', function(done) {
