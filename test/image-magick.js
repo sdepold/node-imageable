@@ -77,6 +77,10 @@ describe('ImageMagick', function() {
     })
 
     describe('with a big image', function() {
+      beforeEach(function () {
+        clearTmpFolder()
+      })
+
       describe('without configured timeouts', function() {
         it('resizes images when size is passed', function(done) {
           resize({ size: '640x480', url: bigImage }, function(err, stdout, stderr) {
@@ -100,7 +104,7 @@ describe('ImageMagick', function() {
         })
       })
 
-      describe('with configured timeouts for resize', function() {
+      describe('with configured timeouts for download', function() {
         beforeEach(function() {
           imageMagick = new ImageMagick({ timeouts: { download: 100 }, tmpPathRoot: testTmpRoot })
         })
