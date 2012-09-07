@@ -6,7 +6,7 @@ const ImageMagick    = require("../lib/image-magick")
     , localImage     = process.cwd() + "/test/fixtures/test.jpg"
     , testTmpRoot    = process.cwd() + "/test/tmp"
     , clearTmpFolder = function() {
-        exec('rm -rf ' + testTmpRoot + "/*")
+//        exec('rm -rf ' + testTmpRoot + "/*")
         exec('rm ' + process.cwd() + "/../tmp/*")
       }
 
