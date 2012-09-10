@@ -1,3 +1,6 @@
+# 0.8.8 #
+- replaced mocha tests with buster tests
+
 # 0.8.7 #
 - moved from whitelisting characters in url to blacklisting
 - fixed french characters in urls
