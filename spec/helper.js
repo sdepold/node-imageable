@@ -11,7 +11,6 @@ module.exports = {
   testTmpRoot: __dirname + "/tmp",
 
   clearTmpFolder: function() {
-    exec('rm ' + this.testTmpRoot + "/*")
-    exec('rm ' + process.cwd() + "/../tmp/*")
+    exec('rm -rf ' + this.testTmpRoot + "/*")
   }
 }
