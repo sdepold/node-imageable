@@ -95,7 +95,7 @@ describe('ImageMagick', function() {
 
       describe('with configured timeouts for convert', function() {
         before(function() {
-          this.imageMagick = new ImageMagick({ timeouts: { convert: 100 }, tmpPathRoot: Helper.testTmpRoot })
+          this.imageMagick = new ImageMagick({ timeouts: { convert: 1 }, tmpPathRoot: Helper.testTmpRoot })
         })
 
         it('resizes images when size is passed', function(done) {
