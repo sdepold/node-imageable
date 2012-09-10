@@ -1,3 +1,6 @@
+# 0.8.9 #
+- fixed require of sys module
+
 # 0.8.8 #
 - replaced mocha tests with buster tests
 
