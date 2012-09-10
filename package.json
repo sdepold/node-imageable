@@ -8,10 +8,6 @@
     "type": "git",
     "url": "git://github.com/dawanda/node-imageable.git"
   },
-  "scripts": {
-    "test": "vows test/*.test.js",
-    "buster-test": "node_modules/.bin/buster-test"
-  },
   "engines": {
     "node": ">=v0.4.7"
   },
@@ -19,11 +15,9 @@
     "identify.js": ">=0.1.2"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha -r should -t 5000"
+    "test": "node_modules/.bin/buster test"
   },
   "devDependencies": {
-    "mocha": "0.10.x",
-    "should": "0.5.1",
     "buster": "~0.6.2"
   }
 }
