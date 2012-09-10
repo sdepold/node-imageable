@@ -1,3 +1,7 @@
+# 0.9.0 #
+- prevent double-decode of url param (thanks to @xxx)
+- fixed inode overflow in tmp folder (thanks to @xxx)
+
 # 0.8.9 #
 - fixed require of sys module
 
