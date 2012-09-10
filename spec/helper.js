@@ -8,8 +8,10 @@ module.exports = {
     local:  __dirname + "/fixtures/test.jpg"
   },
 
+  testTmpRoot: __dirname + "/tmp",
+
   clearTmpFolder: function() {
-    exec('rm ' + process.cwd() + "/test/tmp/*")
+    exec('rm ' + this.testTmpRoot + "/*")
     exec('rm ' + process.cwd() + "/../tmp/*")
   }
 }

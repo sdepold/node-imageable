@@ -8,7 +8,7 @@ buster.testRunner.timeout = 10000
 
 describe('ImageMagick', function() {
   before(function() {
-    this.imageMagick = new ImageMagick({})
+    this.imageMagick = new ImageMagick({ "tmpPathRoot": Helper.testTmpRoot })
 
     this.crop = function(options, callback) {
       this.imageMagick.crop(options, function(err, path) {
@@ -35,6 +35,8 @@ describe('ImageMagick', function() {
         }
       })
     }
+
+    Helper.clearTmpFolder()
   })
 
   after(function() {
@@ -93,7 +95,7 @@ describe('ImageMagick', function() {
 
       describe('with configured timeouts for convert', function() {
         before(function() {
-          this.imageMagick = new ImageMagick({ timeouts: { convert: 100 } })
+          this.imageMagick = new ImageMagick({ timeouts: { convert: 100 }, tmpPathRoot: Helper.testTmpRoot })
         })
 
         it('resizes images when size is passed', function(done) {
@@ -106,7 +108,7 @@ describe('ImageMagick', function() {
 
       describe('with configured timeouts for resize', function() {
         before(function() {
-          this.imageMagick = new ImageMagick({ timeouts: { download: 100 } })
+          this.imageMagick = new ImageMagick({ timeouts: { download: 100 }, tmpPathRoot: Helper.testTmpRoot })
         })
 
         it('resizes images when size is passed', function(done) {
@@ -120,7 +122,7 @@ describe('ImageMagick', function() {
 
     describe('with size limit', function() {
       beforeEach(function() {
-        this.imageMagick = new ImageMagick({ imageSizeLimit: 1000 })
+        this.imageMagick = new ImageMagick({ imageSizeLimit: 1000, tmpPathRoot: Helper.testTmpRoot })
       })
 
       it('works when size is below limit', function() {
