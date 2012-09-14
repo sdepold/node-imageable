@@ -1,5 +1,7 @@
 # v0.10.0 #
 - new option keedDownloads
+- new option maxDownloadCacheSize
+- new option tmpPathRoot (thanks to @xxx)
 
 # v0.9.1 #
 - don't delete already downloaded files (thanks to @xxx)

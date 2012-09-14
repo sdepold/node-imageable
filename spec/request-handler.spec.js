@@ -1,5 +1,6 @@
 var buster         = require('buster')
   , RequestHandler = require(__dirname + '/../lib/request-handler.js')
+  , exec           = require('child_process').exec
 
 buster.spec.expose()
 buster.testRunner.timeout = 10000
@@ -233,6 +234,97 @@ describe('RequestHandler', function() {
       handler._afterResize(null, path, this.res)
 
       mock.verify()
+    })
+
+    it("checks the amount of used hdd space if the option keepDownloads is true and maxDownloadCacheSize is defiend", function() {
+      var handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000 })
+        , path    = 'foo'
+        , mock    = this.mock(handler).expects('checkDownloadCacheSize').once()
+
+      handler._afterResize(null, path, this.res)
+
+      mock.verify()
+    })
+  })
+
+  describe('checkDownloadCacheSize', function() {
+    it("deletes old tempfiles if the amount of used hdd space is greater than the defined maxDownloadCacheSize", function(done) {
+      var handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000 })
+        , mock    = this.mock(handler).expects('_deleteOldDownloads').once().callsArg(0)
+
+      this.stub(handler, '_getTempFolderSize', function(callback) { callback(1100) })
+
+      handler.checkDownloadCacheSize(done)
+
+      mock.verify()
+    })
+
+    it("deletes the files returned by _getOldTempFiles", function(done) {
+      var files = ['a.txt', 'b.txt', 'c.txt'].map(function(f) { return __dirname + '/tmp/' + f })
+
+      exec(files.map(function(f) { return 'touch ' + f }).join(";"), function(err) {
+        var handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000 })
+
+        this.stub(handler, '_getTempFolderSize', function(callback) { callback(1100) })
+        this.stub(handler, '_getOldTempFiles', function(callback) { callback(files) })
+
+        handler.checkDownloadCacheSize(function() {
+          exec('ls -ila ' + __dirname + '/tmp', function(err, stdout, stderr) {
+            files.forEach(function(f) {
+              expect(stdout).not.toMatch(f)
+            })
+
+            done()
+          })
+        })
+      }.bind(this))
+    })
+  })
+
+  describe('_getOldTempFiles', function() {
+    it('returns one fifth of all available files', function(done) {
+      var tmpPathRoot = __dirname + '/tmp/oldTempFileTest'
+        , commands    = [
+            'mkdir -p ' + tmpPathRoot,
+            'touch ' + tmpPathRoot + '/1.txt',
+            'touch ' + tmpPathRoot + '/2.txt',
+            'touch ' + tmpPathRoot + '/3.txt',
+            'touch ' + tmpPathRoot + '/4.txt',
+            'touch ' + tmpPathRoot + '/5.txt'
+          ]
+
+      exec(commands.join(';'), function() {
+        var handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: tmpPathRoot })
+
+        handler._getOldTempFiles(function(files) {
+          expect(files).toEqual([ tmpPathRoot + '/1.txt' ])
+          done()
+        }.bind(this))
+      }.bind(this))
+    })
+  })
+
+  describe('_getTempFolderSize', function() {
+    before(function() {
+      this.tmpPathRoot = __dirname + '/tmp/oldTempFileTest'
+      this.handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: this.tmpPathRoot })
+    })
+
+    it("returns 0 if the folder has less than 1mb of content", function(done) {
+      this.handler._getTempFolderSize(function(size) {
+        expect(size).toEqual(0)
+        done()
+      })
+    })
+
+    it("returns 1 if the folder has slightly more than 1mb of content", function(done) {
+      exec('dd if=/dev/zero of=' + this.tmpPathRoot + '/big.file bs=1024 count=1024 conv=notrunc', function() {
+        this.handler._getTempFolderSize(function(size) {
+          expect(size).toEqual(1)
+          done()
+        })
+      }.bind(this))
+
     })
   })
 })

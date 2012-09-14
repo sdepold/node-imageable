@@ -71,9 +71,27 @@ average processing time etc. You can access them via the stats parameter.
       // Don't delete downloaded files but use them when the same url is requested twice.
       // This can be pretty handy if you don't have a CDN in front of the resizer.
       // Make sure that you always have enough HDD space !
+      //
       // default: false
       // added in: v0.10.0
-      "keepDownloads": true
+      "keepDownloads": true,
+
+      // -- maxDownloadCacheSize --
+      // If you keep downloads you would most probably want to limit the size of the download
+      // folder. Otherwise you will screw up your hard drive. Once the specified limit is reached
+      // node-imageable will start to delete the oldest files in the download folder. The
+      // value is the number of megabytes you want to allow.
+      //
+      // default: null
+      // added in: v0.10.0
+      "maxDownloadCacheSize": 1000,
+
+      // -- tmpPathRoot --
+      // The folder you want to store the downloaded files in.
+      //
+      // default: /tmp/node-image-imagick
+      // added in: v0.10.0
+      "tmpPathRoot": process.cwd() + '/tmp'
     }
 
 The reporting config defines an array of commands which will get executed each _interval_ seconds.<br/>
