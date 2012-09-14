@@ -200,7 +200,11 @@ describe('RequestHandler', function() {
 
   describe('_afterResize', function() {
     before(function() {
-      this.res = { send: function(){} }
+      this.res = {
+        send: function() {},
+        contentType: function() {},
+        sendfile: function(path, options, callback) { callback && callback() }
+      }
     })
 
     it("returns a 500 if an error has occurred", function() {
@@ -211,5 +215,24 @@ describe('RequestHandler', function() {
       mock.verify()
     })
 
+    it("calls deleteTempfile if the option keepDownloads is false or not defined", function() {
+      var handler = new RequestHandler()
+        , path    = 'foo'
+        , mock    = this.mock(handler).expects('deleteTempfile').withArgs(path).once()
+
+      handler._afterResize(null, path, this.res)
+
+      mock.verify()
+    })
+
+    it("doesn't call deleteTempfile if the option keepDownloads is false or not defined", function() {
+      var handler = new RequestHandler({ keepDownloads: true })
+        , path    = 'foo'
+        , mock    = this.mock(handler).expects('deleteTempfile').withArgs(path).never()
+
+      handler._afterResize(null, path, this.res)
+
+      mock.verify()
+    })
   })
 })
