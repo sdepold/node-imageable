@@ -1,3 +1,6 @@
+# 0.9.2 #
+- new option keedDownloads
+
 # 0.9.1 #
 - don't delete already downloaded files (thanks to @xxx)
 

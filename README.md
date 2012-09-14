@@ -65,7 +65,15 @@ average processing time etc. You can access them via the stats parameter.
       "whitelist": {
         "allowedHosts": [".*google\.com", ".*facebook\.com"],
         "trustedHosts": [".*google\.com"]
-      }
+      },
+
+      // -- keepDownloads --
+      // Don't delete downloaded files but use them when the same url is requested twice.
+      // This can be pretty handy if you don't have a CDN in front of the resizer.
+      // Make sure that you always have enough HDD space !
+      // default: false
+      // added in: v0.9.2
+      "keepDownloads": true
     }
 
 The reporting config defines an array of commands which will get executed each _interval_ seconds.<br/>
