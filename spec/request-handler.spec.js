@@ -283,7 +283,7 @@ describe('RequestHandler', function() {
 
   describe('_getOldTempFiles', function() {
     it('returns one fifth of all available files', function(done) {
-      var tmpPathRoot = __dirname + '/tmp/oldTempFileTest'
+      var tmpPathRoot = __dirname + '/tmp/oldTempFileTest' + (~~Math.random() * 9999)
         , commands    = [
             'mkdir -p ' + tmpPathRoot,
             'touch ' + tmpPathRoot + '/1.txt',
