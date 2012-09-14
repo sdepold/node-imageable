@@ -72,7 +72,7 @@ average processing time etc. You can access them via the stats parameter.
       // This can be pretty handy if you don't have a CDN in front of the resizer.
       // Make sure that you always have enough HDD space !
       // default: false
-      // added in: v0.9.2
+      // added in: v0.10.0
       "keepDownloads": true
     }
 
