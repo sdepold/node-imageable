@@ -197,4 +197,19 @@ describe('RequestHandler', function() {
       expect(this.handler._isValidHash(req)).toBeTruthy()
     })
   })
+
+  describe('_afterResize', function() {
+    before(function() {
+      this.res = { send: function(){} }
+    })
+
+    it("returns a 500 if an error has occurred", function() {
+      var mock = this.mock(this.res).expects('send').withArgs(500).once()
+
+      new RequestHandler()._afterResize(new Error('barfooz'), null, this.res)
+
+      mock.verify()
+    })
+
+  })
 })
