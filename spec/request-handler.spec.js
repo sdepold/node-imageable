@@ -6,8 +6,13 @@ buster.spec.expose()
 buster.testRunner.timeout = 10000
 
 describe('RequestHandler', function() {
-  before(function() {
-    this.handler = new RequestHandler({})
+  before(function(done) {
+    this.tmpPathRoot = __dirname + '/tmp/oldTempFileTest' + ~~(Math.random() * 999999)
+
+    exec('rm -rf' + this.tmpPathRoot + '; mkdir -p ' + this.tmpPathRoot, function() {
+      this.handler = new RequestHandler({ tmpPathRoot: this.tmpPathRoot })
+      done()
+    }.bind(this))
   })
 
   describe('getImageProcessUrlMatch', function() {
@@ -282,22 +287,23 @@ describe('RequestHandler', function() {
   })
 
   describe('_getOldTempFiles', function() {
+    before(function() {
+      this.handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: this.tmpPathRoot })
+    })
+
     it('returns one fifth of all available files', function(done) {
-      var tmpPathRoot = __dirname + '/tmp/oldTempFileTest' + (~~Math.random() * 9999)
-        , commands    = [
-            'mkdir -p ' + tmpPathRoot,
-            'touch ' + tmpPathRoot + '/1.txt',
-            'touch ' + tmpPathRoot + '/2.txt',
-            'touch ' + tmpPathRoot + '/3.txt',
-            'touch ' + tmpPathRoot + '/4.txt',
-            'touch ' + tmpPathRoot + '/5.txt'
+      var commands = [
+            'mkdir -p ' + this.tmpPathRoot,
+            'touch ' + this.tmpPathRoot + '/1.txt',
+            'touch ' + this.tmpPathRoot + '/2.txt',
+            'touch ' + this.tmpPathRoot + '/3.txt',
+            'touch ' + this.tmpPathRoot + '/4.txt',
+            'touch ' + this.tmpPathRoot + '/5.txt'
           ]
 
-      exec(commands.join(';'), function() {
-        var handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: tmpPathRoot })
-
-        handler._getOldTempFiles(function(files) {
-          expect(files).toEqual([ tmpPathRoot + '/1.txt' ])
+      exec(commands.join('; sleep 1; '), function() {
+        this.handler._getOldTempFiles(function(files) {
+          expect(files).toEqual([ this.tmpPathRoot + '/1.txt' ])
           done()
         }.bind(this))
       }.bind(this))
@@ -306,15 +312,18 @@ describe('RequestHandler', function() {
 
   describe('_getTempFolderSize', function() {
     before(function() {
-      this.tmpPathRoot = __dirname + '/tmp/oldTempFileTest' + (~~Math.random() * 9999)
       this.handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: this.tmpPathRoot })
     })
 
     it("returns 0 if the folder has less than 1mb of content", function(done) {
-      this.handler._getTempFolderSize(function(size) {
-        expect(size).toEqual(0)
-        done()
-      })
+      exec('ls -ila ' + this.tmpPathRoot, function(_, stdout, _) {
+        console.log(stdout)
+        this.handler._getTempFolderSize(function(size) {
+          expect(size).toEqual(0)
+          done()
+        })
+
+      }.bind(this))
     })
 
     it("returns 1 if the folder has slightly more than 1mb of content", function(done) {
