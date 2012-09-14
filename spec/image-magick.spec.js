@@ -112,7 +112,7 @@ describe('ImageMagick', function() {
         })
 
         it('resizes images when size is passed', function(done) {
-          this.imageMagick.resize({ size: '640x480', url: Helper.images.big }, function(err, path) {
+          this.imageMagick.resize({ size: '640x480', url: Helper.images.big + '?' + ~~(Math.random() * 99999) }, function(err, path) {
             expect(err.killed).toBeTrue()
             done()
           })
