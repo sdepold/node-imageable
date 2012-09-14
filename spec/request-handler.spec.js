@@ -306,7 +306,7 @@ describe('RequestHandler', function() {
 
   describe('_getTempFolderSize', function() {
     before(function() {
-      this.tmpPathRoot = __dirname + '/tmp/oldTempFileTest'
+      this.tmpPathRoot = __dirname + '/tmp/oldTempFileTest' + (~~Math.random() * 9999)
       this.handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: this.tmpPathRoot })
     })
 
