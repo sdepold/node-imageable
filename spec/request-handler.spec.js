@@ -315,14 +315,14 @@ describe('RequestHandler', function() {
       this.handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: this.tmpPathRoot })
     })
 
-    it("=>returns 0 if the folder is empty", function(done) {
+    it("returns 0 if the folder is empty", function(done) {
       this.handler._getTempFolderSize(function(size) {
         expect(size).toEqual(0)
         done()
       })
     })
 
-    it("=>returns 0 if the folder has less than 1mb of content", function(done) {
+    it("returns 0 if the folder has less than 1mb of content", function(done) {
       exec('dd if=/dev/zero of=' + this.tmpPathRoot + '/tiny.file bs=1024 count=10 conv=notrunc', function() {
         this.handler._getTempFolderSize(function(size) {
           expect(size).toEqual(0)
@@ -331,7 +331,7 @@ describe('RequestHandler', function() {
       }.bind(this))
     })
 
-    it("=>returns 1 if the folder has 1mb of content", function(done) {
+    it("returns 1 if the folder has 1mb of content", function(done) {
       exec('dd if=/dev/zero of=' + this.tmpPathRoot + '/big.file bs=1024 count=1024 conv=notrunc', function() {
         this.handler._getTempFolderSize(function(size) {
           expect(size).toEqual(1)
@@ -340,7 +340,7 @@ describe('RequestHandler', function() {
       }.bind(this))
     })
 
-    it("=>returns 1 if the folder has slightly more than 1mb of content", function(done) {
+    it("returns 1 if the folder has slightly more than 1mb of content", function(done) {
       exec('dd if=/dev/zero of=' + this.tmpPathRoot + '/big.file bs=1024 count=1048 conv=notrunc', function() {
         this.handler._getTempFolderSize(function(size) {
           expect(size).toEqual(1)
@@ -349,7 +349,7 @@ describe('RequestHandler', function() {
       }.bind(this))
     })
 
-    it("=>returns 10 if the folder has 10mb of content", function(done) {
+    it("returns 10 if the folder has 10mb of content", function(done) {
       exec('dd if=/dev/zero of=' + this.tmpPathRoot + '/big.file bs=1024 count=10240 conv=notrunc', function() {
         this.handler._getTempFolderSize(function(size) {
           expect(size).toEqual(10)
