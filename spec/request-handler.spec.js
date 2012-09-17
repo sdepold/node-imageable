@@ -316,24 +316,10 @@ describe('RequestHandler', function() {
     })
 
     it("=>returns 0 if the folder has less than 1mb of content", function(done) {
-      console.log('nooooo cooooontent')
-
-      exec('ls -ila ' + this.tmpPathRoot, function(a, stdout, b) {
-        console.log('ls -ila', stdout)
-
-        exec('du -csm ' + this.tmpPathRoot, function(err, stdout, stderr) {
-          console.log('du -csm', stdout)
-
-          this.handler._getTempFolderSize(function(size) {
-            expect(size).toEqual(0)
-
-            console.log('noooo connnntent done')
-
-            done()
-          })
-        }.bind(this))
-
-      }.bind(this))
+      this.handler._getTempFolderSize(function(size) {
+        expect(size).toEqual(0)
+        done()
+      })
     })
 
     it("returns 1 if the folder has slightly more than 1mb of content", function(done) {
