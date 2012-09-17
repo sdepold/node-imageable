@@ -321,7 +321,7 @@ describe('RequestHandler', function() {
       exec('ls -ila ' + this.tmpPathRoot, function(a, stdout, b) {
         console.log('no content', stdout)
 
-        exec('du -csm ' + this.config.tmpPathRoot, function(err, stdout, stderr) {
+        exec('du -csm ' + this.tmpPathRoot, function(err, stdout, stderr) {
           console.log(stdout)
 
           this.handler._getTempFolderSize(function(size) {
