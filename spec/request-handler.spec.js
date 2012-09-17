@@ -319,10 +319,10 @@ describe('RequestHandler', function() {
       console.log('nooooo cooooontent')
 
       exec('ls -ila ' + this.tmpPathRoot, function(a, stdout, b) {
-        console.log('no content', stdout)
+        console.log('ls -ila', stdout)
 
         exec('du -csm ' + this.tmpPathRoot, function(err, stdout, stderr) {
-          console.log(stdout)
+          console.log('du -csm', stdout)
 
           this.handler._getTempFolderSize(function(size) {
             expect(size).toEqual(0)
