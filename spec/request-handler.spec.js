@@ -315,13 +315,23 @@ describe('RequestHandler', function() {
       this.handler = new RequestHandler({ keepDownloads: true, maxDownloadCacheSize: 1000, tmpPathRoot: this.tmpPathRoot })
     })
 
-    it("returns 0 if the folder has less than 1mb of content", function(done) {
-      exec('ls -ila ' + this.tmpPathRoot, function(_, stdout, _) {
+    it("=>returns 0 if the folder has less than 1mb of content", function(done) {
+      console.log('nooooo cooooontent')
+
+      exec('ls -ila ' + this.tmpPathRoot, function(a, stdout, b) {
         console.log('no content', stdout)
-        this.handler._getTempFolderSize(function(size) {
-          expect(size).toEqual(0)
-          done()
-        })
+
+        exec('du -csm ' + this.config.tmpPathRoot, function(err, stdout, stderr) {
+          console.log(stdout)
+
+          this.handler._getTempFolderSize(function(size) {
+            expect(size).toEqual(0)
+
+            console.log('noooo connnntent done')
+
+            done()
+          })
+        }.bind(this))
 
       }.bind(this))
     })
