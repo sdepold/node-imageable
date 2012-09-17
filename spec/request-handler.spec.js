@@ -317,7 +317,7 @@ describe('RequestHandler', function() {
 
     it("returns 0 if the folder has less than 1mb of content", function(done) {
       exec('ls -ila ' + this.tmpPathRoot, function(_, stdout, _) {
-        console.log(stdout)
+        console.log('no content', stdout)
         this.handler._getTempFolderSize(function(size) {
           expect(size).toEqual(0)
           done()
