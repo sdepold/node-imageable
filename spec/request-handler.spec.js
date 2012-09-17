@@ -293,13 +293,13 @@ describe('RequestHandler', function() {
 
     it('returns one fifth of all available files', function(done) {
       var commands = [
-            'mkdir -p ' + this.tmpPathRoot,
-            'touch ' + this.tmpPathRoot + '/1.txt',
-            'touch ' + this.tmpPathRoot + '/2.txt',
-            'touch ' + this.tmpPathRoot + '/3.txt',
-            'touch ' + this.tmpPathRoot + '/4.txt',
-            'touch ' + this.tmpPathRoot + '/5.txt'
-          ]
+        'mkdir -p ' + this.tmpPathRoot,
+        'touch ' + this.tmpPathRoot + '/1.txt',
+        'touch ' + this.tmpPathRoot + '/2.txt',
+        'touch ' + this.tmpPathRoot + '/3.txt',
+        'touch ' + this.tmpPathRoot + '/4.txt',
+        'touch ' + this.tmpPathRoot + '/5.txt'
+      ]
 
       exec(commands.join('; sleep 1; '), function() {
         this.handler._getOldTempFiles(function(files) {
