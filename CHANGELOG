@@ -1,3 +1,7 @@
+# v0.10.1 #
+- more debugging information about tmp file deletion
+- don't break if unlink is failing
+
 # v0.10.0 #
 - new option keedDownloads
 - new option maxDownloadCacheSize
