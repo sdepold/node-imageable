@@ -7,32 +7,38 @@ Calling specific URLs (look below) will return resized and cropped images.
 
 In your express app you will find a section like this:
 
-    app.configure(function(){
-      app.use(express.bodyParser())
-      app.use(express.methodOverride())
-      //...
-      app.use(app.router)
-    })
+```js
+app.configure(function(){
+  app.use(express.bodyParser())
+  app.use(express.methodOverride())
+  //...
+  app.use(app.router)
+})
+```
 
 To plug imageable into your app, just add the following ABOVE the router:
 
-    app.use(imageable(config, options))
+```js
+app.use(imageable(config, options))
+```
 
 Here is what an app should look like:
 
 ## app.js ##
-    var fs     = require("fs")
-      , config = JSON.parse(fs.readFileSync(__dirname + "/config/config.json"))
+```js
+var fs     = require("fs")
+  , config = JSON.parse(fs.readFileSync(__dirname + "/config/config.json"))
 
-    app.configure(function(){
-      app.use(express.bodyParser())
-      app.use(express.methodOverride())
-      app.use(imageable(config, {
-        before: function(stats) { console.log('before') },
-        after: function(stats, returnValueOfBefore, err) { console.log('after') }
-      }))
-      app.use(app.router)
-    })
+app.configure(function(){
+  app.use(express.bodyParser())
+  app.use(express.methodOverride())
+  app.use(imageable(config, {
+    before: function(stats) { console.log('before') },
+    after: function(stats, returnValueOfBefore, err) { console.log('after') }
+  }))
+  app.use(app.router)
+})
+```
 
 Notice that the after-callback will have the returned value of the before-callback as
 second parameter. Using that mechanism, you can for example track custom statistics.
@@ -44,55 +50,64 @@ average processing time etc. You can access them via the stats parameter.
 
 
 ## config/config.json ##
-    {
-      "secret":       "my-very-secret-secret",
-      "magicHash":    "magic",
-      "namespace":    "",
-      "maxListeners": 512,
-      "imageSizeLimit": 1024,
-      "timeouts": {
-        convert: 5000,
-        identify: 100,
-        download: 1000
-      }
-      "reporting": {
-        "interval": 10,
-        "commands": [
-          'curl -s http://foo.bar.org/report?avg=%{avg}',
-          'curl -s http://foo.bar.org/report?count=%{count}'
-        ]
-      },
-      "whitelist": {
-        "allowedHosts": [".*google\.com", ".*facebook\.com"],
-        "trustedHosts": [".*google\.com"]
-      },
+```js
+{
+  "secret":       "my-very-secret-secret",
+  "magicHash":    "magic",
+  "namespace":    "",
+  "maxListeners": 512,
+  "imageSizeLimit": 1024,
+  "timeouts": {
+    convert: 5000,
+    identify: 100,
+    download: 1000
+  }
+  "reporting": {
+    "interval": 10,
+    "commands": [
+      'curl -s http://foo.bar.org/report?avg=%{avg}',
+      'curl -s http://foo.bar.org/report?count=%{count}'
+    ]
+  },
+  "whitelist": {
+    "allowedHosts": [".*google\.com", ".*facebook\.com"],
+    "trustedHosts": [".*google\.com"]
+  },
 
-      // -- keepDownloads --
-      // Don't delete downloaded files but use them when the same url is requested twice.
-      // This can be pretty handy if you don't have a CDN in front of the resizer.
-      // Make sure that you always have enough HDD space !
-      //
-      // default: false
-      // added in: v0.10.0
-      "keepDownloads": true,
+  // -- keepDownloads --
+  // Don't delete downloaded files but use them when the same url is requested twice.
+  // This can be pretty handy if you don't have a CDN in front of the resizer.
+  // Make sure that you always have enough HDD space !
+  //
+  // default: false
+  // added in: v0.10.0
+  "keepDownloads": true,
 
-      // -- maxDownloadCacheSize --
-      // If you keep downloads you would most probably want to limit the size of the download
-      // folder. Otherwise you will screw up your hard drive. Once the specified limit is reached
-      // node-imageable will start to delete the oldest files in the download folder. The
-      // value is the number of megabytes you want to allow.
-      //
-      // default: null
-      // added in: v0.10.0
-      "maxDownloadCacheSize": 1000,
+  // -- maxDownloadCacheSize --
+  // If you keep downloads you would most probably want to limit the size
+  // of the download folder. Otherwise you will screw up your hard drive.
+  // Once the specified limit is reached node-imageable will start to delete
+  // the oldest files (20% of the existing files) in the download folder.
+  // The value is the number of megabytes you want to allow.
+  //
+  // tl;dr;
+  // Depending on the size of the source images, it might be not a good idea
+  // to set this value to less than 100. That's based on the fact that the
+  // server will only have a few files in the tmp folder and that deleting
+  // 20% of them will still result in a greater amount of used hdd space.
+  //
+  // default: null
+  // added in: v0.10.0
+  "maxDownloadCacheSize": 1000,
 
-      // -- tmpPathRoot --
-      // The folder you want to store the downloaded files in.
-      //
-      // default: /tmp/node-image-imagick
-      // added in: v0.10.0
-      "tmpPathRoot": process.cwd() + '/tmp'
-    }
+  // -- tmpPathRoot --
+  // The folder you want to store the downloaded files in.
+  //
+  // default: /tmp/node-image-imagick
+  // added in: v0.10.0
+  "tmpPathRoot": process.cwd() + '/tmp'
+}
+```
 
 The reporting config defines an array of commands which will get executed each _interval_ seconds.<br/>
 The whitelist config allows you furthermore to limit the hosts of image sources (allowedHosts) or
