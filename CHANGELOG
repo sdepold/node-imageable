@@ -1,4 +1,4 @@
-# v0.10.1 #
+# v0.10.1 - v0.10.5 #
 - more debugging information about tmp file deletion
 - don't break if unlink is failing
 
