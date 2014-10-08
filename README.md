@@ -3,6 +3,14 @@
 You can put imageable into your express application, where it acts as middleware.
 Calling specific URLs (look below) will return resized and cropped images.
 
+# What will I need?
+
+Besides [Node.JS](http://nodejs.org) you will need [imagemagick](http://www.imagemagick.org) and eventually some other libs for image format handling. On a mac this is a fairly easy mission:
+
+```
+brew install imagemagick
+```
+
 # How to get it run.
 
 In your express app you will find a section like this:
